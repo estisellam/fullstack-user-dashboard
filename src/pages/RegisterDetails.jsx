@@ -1,22 +1,28 @@
 import { useState } from "react";
-import { useNavigate, useLocation } from "react-router-dom";
+import { useNavigate, useLocation, Navigate } from "react-router-dom";
 
 export default function RegisterDetails() {
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [phone, setPhone] = useState("");
+  const [error, setError] = useState(""); 
 
   const navigate = useNavigate();
   const location = useLocation();
 
-  //we got this from previes page
+  //we got this from previous page
   const { username, password } = location.state || {};
+
+
+  if (!username || !password) {
+    return <Navigate to="/register" />;
+  }
 
   async function handleComplete(e) {
     e.preventDefault();
 
     if (!name || !email || !phone) {
-      alert("All fields are required");
+      setError("All fields are required");
       return;
     }
 
@@ -38,7 +44,7 @@ export default function RegisterDetails() {
 
     const createdUser = await res.json();
 
-    //save to localstorge
+    //save to localstorage
     localStorage.setItem("currentUser", JSON.stringify(createdUser));
 
     //move home
@@ -46,8 +52,9 @@ export default function RegisterDetails() {
   }
 
   return (
-    <div>
+    <div className="card">
       <h2>Complete Registration</h2>
+      <p>Tell us more about you</p>
 
       <form onSubmit={handleComplete}>
         <input
@@ -70,6 +77,8 @@ export default function RegisterDetails() {
 
         <button type="submit">Finish</button>
       </form>
+
+      {error && <p className="error">{error}</p>}
     </div>
   );
 }

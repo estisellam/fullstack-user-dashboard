@@ -1,0 +1,158 @@
+:root {
+  --bg-main: #0b0b0f;
+  --bg-card: rgba(255, 255, 255, 0.04);
+
+  --primary: #47011a;     
+  --primary-hover: #cf688e;
+
+  --accent: #fbcfe8;    
+  --text-main: #ffffff;
+  --text-soft: #cbd5e1;
+
+  --border: rgba(255,255,255,0.08);
+}
+
+body {
+
+  margin: 0;
+  font-family: 'Inter', sans-serif;
+  background: radial-gradient(circle at top, #2a111a, #0b0b0f);
+  color: white;
+  font-size: 16px;
+
+}
+
+
+.card {
+  width: 340px;
+  margin: 100px auto;
+  padding: 32px;
+  border-radius: 18px;
+
+  background: var(--bg-card);
+  backdrop-filter: blur(12px);
+
+  border: 1px solid var(--border);
+  box-shadow: 0 0 40px rgba(127, 29, 63, 0.2);
+}
+
+input {
+  width: 100%;
+  padding: 12px;
+  margin: 10px 0;
+
+  border-radius: 10px;
+  border: 1px solid var(--border);
+
+  background: rgba(255,255,255,0.05);
+  color: var(--text-main);
+
+  transition: 0.2s;
+}
+
+input:focus {
+  border: 1px solid var(--primary);
+  box-shadow: 0 0 10px rgba(127, 29, 63, 0.5);
+}
+
+button {
+  padding: 12px;
+  margin-top: 12px;
+
+  border-radius: 10px;
+  border: none;
+
+  background: linear-gradient(135deg, var(--primary), #be185d);
+  color: white;
+  font-weight: 600;
+
+  cursor: pointer;
+  transition: 0.25s;
+}
+
+button:hover {
+  transform: translateY(-1px);
+  background: linear-gradient(135deg, var(--primary-hover), #ec4899);
+}
+
+.error {
+  color: #fda4af;
+  margin-top: 10px;
+  font-size: 14px;
+}
+h1 {
+
+  font-size: 32px;
+
+}
+
+h2 {
+  margin-bottom: 24px;
+}
+
+p {
+  color: var(--text-soft);
+  margin-bottom: 20px;
+  font-size: 16px;
+}
+.layout {
+  display: flex;
+  height: 100vh;
+}
+
+.sidebar {
+  width: 220px;
+  background: linear-gradient(180deg, #2a111a, var(--bg-main));
+  padding: 20px;
+
+  display: flex;
+  flex-direction: column;
+
+  border-right: 1px solid var(--border);
+}
+
+.logo {
+  color: var(--accent);
+  margin-bottom: 30px;
+}
+
+.sidebar button {
+  background: transparent;
+  border: none;
+  color: var(--text-soft);
+
+  text-align: left;
+  padding: 10px;
+  border-radius: 8px;
+
+  cursor: pointer;
+  transition: 0.2s;
+  font-size: 18px;
+}
+
+.sidebar button:hover {
+  background: var(--primary);
+  color: white;
+}
+
+.spacer {
+  flex: 1;
+}
+
+.logout {
+  border-top: 1px solid var(--border);
+  margin-top: 10px;
+  padding-top: 15px;
+  color: #fda4af;
+}
+
+.main {
+  flex: 1;
+  padding: 40px;
+
+  background: radial-gradient(circle at top, #3a1522, var(--bg-main));
+}
+
+.main h1 {
+  color: var(--accent);
+}

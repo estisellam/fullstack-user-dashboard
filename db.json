@@ -13,6 +13,14 @@
       "phone": "0u8283",
       "website": "1",
       "id": "PibthRX-fXU"
+    },
+    {
+      "name": "esther",
+      "username": "stt",
+      "email": "esti@gmail.com",
+      "phone": "0515893770",
+      "website": "123",
+      "id": "sMBqGD4XAgI"
     }
   ],
   "$schema": "./node_modules/json-server/schema.json"

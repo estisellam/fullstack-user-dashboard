@@ -1,19 +1,19 @@
 import { useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, Link } from "react-router-dom";
 
 export default function Register() {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [verify, setVerify] = useState("");
   const [error, setError] = useState("");
+
   //move between pages
   const navigate = useNavigate();
 
   async function handleRegister(e) {
-    
     e.preventDefault();
 
-    const user= username;
+    const user = username;
     const pass = password;
     const ver = verify;
 
@@ -30,47 +30,59 @@ export default function Register() {
     }
 
     //check if user already exist
-    const res = await fetch(`http://localhost:3001/users?username=${user}`);
+    const res = await fetch(
+      `http://localhost:3001/users?username=${user}`
+    );
     const data = await res.json();
 
     if (data.length > 0) {
       setError("Username already exists");
       return;
     }
+
     navigate("/register/details", {
       state: { username: user, password: pass }
     });
   }
 
   return (
-    <div>
-      <h2>Register</h2>
+    <div className="card"> 
+      <h2>Create Account</h2>
+      <p>Start your journey</p>
 
       <form onSubmit={handleRegister}>
         <input
-          placeholder="username"
+          placeholder="Username"
           value={username}
           onChange={(e) => setUsername(e.target.value)}
         />
 
         <input
           type="password"
-          placeholder="password"
+          placeholder="Password"
           value={password}
           onChange={(e) => setPassword(e.target.value)}
         />
 
         <input
           type="password"
-          placeholder="verify password"
+          placeholder="Verify Password"
           value={verify}
           onChange={(e) => setVerify(e.target.value)}
         />
 
-        <button type="submit">Register</button>
+        <button type="submit">Continue</button>
       </form>
 
-      {error && <p style={{ color: "red" }}>{error}</p>}
+
+      {error && <p className="error">{error}</p>}
+
+      <p style={{ marginTop: "15px" }}>
+        Already have an account?{" "}
+        <Link to="/login" style={{ color: "#fbcfe8" }}>
+          Login
+        </Link>
+      </p>
     </div>
   );
 }
