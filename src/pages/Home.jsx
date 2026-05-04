@@ -20,7 +20,7 @@ export default function Home() {
       <div className="sidebar">
         <h3 className="logo">Hi {user.name}</h3>
 
-        <button>Info</button>
+        <button onClick={() => navigate("/home/info")}>Info</button>
         <button>Todos</button>
         <button>Posts</button>
         <button>Albums</button>

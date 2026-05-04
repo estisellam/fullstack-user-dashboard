@@ -149,10 +149,56 @@ p {
 .main {
   flex: 1;
   padding: 40px;
-
+  display: flex;
+  justify-content: center;
+  align-items: center;
   background: radial-gradient(circle at top, #3a1522, var(--bg-main));
 }
 
 .main h1 {
   color: var(--accent);
+}
+.info-card {
+  max-width: 500px;
+  background: rgba(255,255,255,0.06);
+  padding: 24px;
+  border-radius: 14px;
+  border: 1px solid var(--border);
+  margin: 40px auto ;
+  padding: 32px;
+}
+
+.info-card h2 {
+  color: var(--accent);
+  margin-bottom: 20px;
+}
+
+.info-row {
+  display: flex;
+  justify-content: space-between;
+  padding: 10px 0;
+  border-bottom: 1px solid rgba(255,255,255,0.05);
+}
+
+.info-row span {
+  color: var(--text-soft);
+}
+
+.info-row strong {
+  color: white;
+}
+.back-btn {
+  background: transparent;
+  border: none;
+  color: var(--accent);
+
+  margin-bottom: 15px;
+  cursor: pointer;
+
+  font-size: 14px;
+  transition: 0.2s;
+}
+
+.back-btn:hover {
+  color: white;
 }
