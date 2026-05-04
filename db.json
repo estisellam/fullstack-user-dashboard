@@ -1,10 +1,19 @@
 {
   "users": [
     {
-      "id": 1,
+      "id": "1",
       "name": "Esti Vaknin",
       "username": "esti",
       "website": "1234"
+    },
+    {
+      "name": "esther",
+      "username": "st",
+      "email": "s@g",
+      "phone": "0u8283",
+      "website": "1",
+      "id": "PibthRX-fXU"
     }
-  ]
+  ],
+  "$schema": "./node_modules/json-server/schema.json"
 }

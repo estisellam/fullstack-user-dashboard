@@ -37,28 +37,9 @@ export default function Register() {
       setError("Username already exists");
       return;
     }
-
-    // create new basic user
-    const newUser = {
-      name: user,
-      username: user,
-      website: pass
-    };
-
-    const createRes = await fetch("http://localhost:3001/users", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json"
-      },
-      body: JSON.stringify(newUser)
+    navigate("/register/details", {
+      state: { username: user, password: pass }
     });
-
-    const createdUser = await createRes.json();
-    //save to localStorage
-    localStorage.setItem("currentUser", JSON.stringify(createdUser));
-
-
-    navigate("/home");
   }
 
   return (
