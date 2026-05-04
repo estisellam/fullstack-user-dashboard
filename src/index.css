@@ -151,7 +151,6 @@ p {
   padding: 40px;
   display: flex;
   justify-content: center;
-  align-items: center;
   background: radial-gradient(circle at top, #3a1522, var(--bg-main));
 }
 
