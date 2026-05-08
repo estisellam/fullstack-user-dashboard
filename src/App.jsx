@@ -4,6 +4,9 @@ import Home from "./pages/Home";
 import Register from "./pages/Register";
 import RegisterDetails from "./pages/RegisterDetails";
 import Info from "./pages/Info";
+import Todos from "./pages/Todos";
+import Posts from "./pages/Posts";
+import Albums from "./pages/Albums";
 
 function App() {
   return (
@@ -15,6 +18,9 @@ function App() {
         <Route path="/register" element={<Register />} />
         <Route path="/register/details" element={<RegisterDetails />} />
         <Route path="/home/info" element={<Info />} />
+        <Route path="/home/todos" element={<Todos />} />
+        <Route path="/home/posts" element={<Posts />} />
+        <Route path="/home/albums" element={<Albums />} />
       </Routes>
     </BrowserRouter>
   );

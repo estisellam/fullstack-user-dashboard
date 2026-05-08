@@ -21,9 +21,9 @@ export default function Home() {
         <h3 className="logo">Hi {user.name}</h3>
 
         <button onClick={() => navigate("/home/info")}>Info</button>
-        <button>Todos</button>
-        <button>Posts</button>
-        <button>Albums</button>
+        <button onClick={() => navigate("/home/todos")}>Todos</button>
+        <button onClick={() => navigate("/home/posts")}>Posts</button>
+        <button onClick={() => navigate("/home/albums")}>Albums</button>
 
         <div className="spacer"></div>
 
@@ -33,7 +33,31 @@ export default function Home() {
       </div>
 
       <div className="main">
-        <h1>Dashboard</h1>
+        <div className="dashboard-content">
+          <h1 className="dashboard-title">Dashboard</h1>
+
+          <p className="dashboard-subtitle">
+            Welcome, {user.name}. Choose what you want to manage.
+          </p>
+
+          <div className="dashboard-grid">
+
+            <div className="dashboard-card" onClick={() => navigate("/home/todos")}>
+              <h3>Todos</h3>
+              <p>Manage your personal tasks: add, update, delete and search.</p>
+            </div>
+
+            <div className="dashboard-card" onClick={() => navigate("/home/posts")}>
+              <h3>Posts</h3>
+              <p>View posts, create your own posts and comment on others.</p>
+            </div>
+
+            <div className="dashboard-card" onClick={() => navigate("/home/albums")}>
+              <h3>Albums</h3>
+              <p>Manage your albums and photos.</p>
+            </div>
+          </div>
+        </div>
       </div>
     </div>
   );
