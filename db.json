@@ -1,12 +1,6 @@
 {
   "users": [
     {
-      "id": "1",
-      "name": "Esti Vaknin",
-      "username": "esti",
-      "website": "1234"
-    },
-    {
       "name": "esther",
       "username": "st",
       "email": "s@g",
@@ -21,6 +15,80 @@
       "phone": "0515893770",
       "website": "123",
       "id": "sMBqGD4XAgI"
+    },
+    {
+      "name": "shoval",
+      "username": "shoval",
+      "email": "sho@gmail.com",
+      "phone": "0505555555",
+      "website": "1234",
+      "id": "Jx4enC8Jr24"
+    }
+  ],
+  "todos": [
+    {
+      "userId": "Jx4enC8Jr24",
+      "title": "sleep 8 hours",
+      "completed": false,
+      "id": "9YgZHebVNOs"
+    },
+    {
+      "userId": "Jx4enC8Jr24",
+      "title": "go workout",
+      "completed": false,
+      "id": "RtbnhOvaZZE"
+    },
+    {
+      "userId": "Jx4enC8Jr24",
+      "title": "make food",
+      "completed": false,
+      "id": "stPeMYiT02s"
+    }
+  ],
+  "posts": [
+    {
+      "userId": "Jx4enC8Jr24",
+      "title": "shoval post",
+      "body": "1",
+      "id": "unXFmuu3SFA"
+    }
+  ],
+  "comments": [
+    {
+      "postId": "Dp242-_bC4Q",
+      "userId": "Jx4enC8Jr24",
+      "name": "shoval",
+      "email": "sho@gmail.com",
+      "body": "vbbfj",
+      "id": "CeAjgnZTrag"
+    }
+  ],
+  "albums": [
+    {
+      "userId": "Jx4enC8Jr24",
+      "title": "trip japan",
+      "id": "5_XDqwWs-ec"
+    },
+    {
+      "userId": "Jx4enC8Jr24",
+      "title": "London",
+      "id": "ygL8q34dsqA"
+    }
+  ],
+  "photos": [
+    {
+      "albumId": "5_XDqwWs-ec",
+      "title": "first day 1",
+      "url": "https://images.unsplash.com/photo-1500530855697-b586d89ba3ee",
+      "thumbnailUrl": "https://images.unsplash.com/photo-1500530855697-b586d89ba3ee",
+      "id": "eVI6rv-V_pA"
+    },
+    {
+      "albumId": "ygL8q34dsqA",
+      "title": "first day",
+      "url": "https://images.unsplash.com/photo-1501785888041-af3ef285b470",
+      "thumbnailUrl": "https://images.unsplash.com/photo-1501785888041-af3ef285b470",
+      "id": "bbgX6poq8no"
     }
   ],
   "$schema": "./node_modules/json-server/schema.json"
