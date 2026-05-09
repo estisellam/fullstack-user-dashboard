@@ -23,18 +23,26 @@
       "phone": "0505555555",
       "website": "1234",
       "id": "Jx4enC8Jr24"
+    },
+    {
+      "name": "nitay",
+      "username": "nit",
+      "email": "nit@gmail.com",
+      "phone": "05055500000",
+      "website": "1234",
+      "id": "Ex_KkJKWoKI"
     }
   ],
   "todos": [
     {
       "userId": "Jx4enC8Jr24",
       "title": "sleep 8 hours",
-      "completed": false,
+      "completed": true,
       "id": "9YgZHebVNOs"
     },
     {
       "userId": "Jx4enC8Jr24",
-      "title": "go workout",
+      "title": "workout",
       "completed": false,
       "id": "RtbnhOvaZZE"
     },
@@ -48,9 +56,24 @@
   "posts": [
     {
       "userId": "Jx4enC8Jr24",
+      "userName": "shoval",
       "title": "shoval post",
       "body": "1",
       "id": "unXFmuu3SFA"
+    },
+    {
+      "userId": "Ex_KkJKWoKI",
+      "userName": "nitay",
+      "title": "nit",
+      "body": "fsfgdfbdf",
+      "id": "ZK7wpNAUsks"
+    },
+    {
+      "userId": "Jx4enC8Jr24",
+      "userName": "shoval",
+      "title": "nbvnn",
+      "body": "4teey",
+      "id": "XffE1g2DbQk"
     }
   ],
   "comments": [
@@ -61,6 +84,30 @@
       "email": "sho@gmail.com",
       "body": "vbbfj",
       "id": "CeAjgnZTrag"
+    },
+    {
+      "postId": "unXFmuu3SFA",
+      "userId": "Ex_KkJKWoKI",
+      "name": "nitay",
+      "email": "nit@gmail.com",
+      "body": "fghgfhfgh",
+      "id": "qd--xtVWkT0"
+    },
+    {
+      "postId": "ZK7wpNAUsks",
+      "userId": "Ex_KkJKWoKI",
+      "name": "nitay",
+      "email": "nit@gmail.com",
+      "body": "bngnf",
+      "id": "dz2_F61N-eE"
+    },
+    {
+      "postId": "ZK7wpNAUsks",
+      "userId": "Jx4enC8Jr24",
+      "name": "shoval",
+      "email": "sho@gmail.com",
+      "body": "khiji",
+      "id": "bjlkMAoq6DM"
     }
   ],
   "albums": [
@@ -68,27 +115,22 @@
       "userId": "Jx4enC8Jr24",
       "title": "trip japan",
       "id": "5_XDqwWs-ec"
-    },
-    {
-      "userId": "Jx4enC8Jr24",
-      "title": "London",
-      "id": "ygL8q34dsqA"
     }
   ],
   "photos": [
     {
       "albumId": "5_XDqwWs-ec",
-      "title": "first day 1",
+      "title": "first day1",
       "url": "https://images.unsplash.com/photo-1500530855697-b586d89ba3ee",
       "thumbnailUrl": "https://images.unsplash.com/photo-1500530855697-b586d89ba3ee",
       "id": "eVI6rv-V_pA"
     },
     {
-      "albumId": "ygL8q34dsqA",
-      "title": "first day",
+      "albumId": "5_XDqwWs-ec",
+      "title": "feree",
       "url": "https://images.unsplash.com/photo-1501785888041-af3ef285b470",
       "thumbnailUrl": "https://images.unsplash.com/photo-1501785888041-af3ef285b470",
-      "id": "bbgX6poq8no"
+      "id": "yg1Cbb-KSZg"
     }
   ],
   "$schema": "./node_modules/json-server/schema.json"

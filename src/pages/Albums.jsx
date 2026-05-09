@@ -103,6 +103,7 @@ function Albums() {
   function cancelEditAlbum() {
     setEditingAlbumId(null);
     setEditingAlbumTitle("");
+    setError("");
   }
 
   async function saveEditAlbum(album) {
@@ -219,11 +220,6 @@ function Albums() {
   }
 
   async function addPhoto() {
-    if (!selectedAlbum) {
-      setError("Please select an album first");
-      return;
-    }
-
     if (newPhotoTitle.trim() === "" || newPhotoUrl.trim() === "") {
       setError("Please enter photo title and url");
       return;
@@ -325,6 +321,7 @@ function Albums() {
     setEditingPhotoId(null);
     setEditingPhotoTitle("");
     setEditingPhotoUrl("");
+    setError("");
   }
 
   function getFilteredAlbums() {
@@ -339,8 +336,6 @@ function Albums() {
         if (searchBy === "title") {
           return album.title.toLowerCase().includes(searchText.toLowerCase());
         }
-
-        return true;
       });
     }
 

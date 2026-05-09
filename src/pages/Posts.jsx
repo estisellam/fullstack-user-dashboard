@@ -84,6 +84,7 @@ function Posts() {
     try {
       const newPost = {
         userId: currentUser.id,
+        userName: currentUser.name,
         title: newPostTitle,
         body: newPostBody,
       };
@@ -187,12 +188,14 @@ function Posts() {
     setEditingPostId(null);
     setEditingPostTitle("");
     setEditingPostBody("");
+    setError("");
   }
 
   function selectPost(post) {
     setSelectedPost(post);
     setShowComments(false);
     setComments([]);
+    setError("");
   }
 
   async function getComments(postId) {
@@ -307,6 +310,7 @@ function Posts() {
   function cancelEditComment() {
     setEditingCommentId(null);
     setEditingCommentBody("");
+    setError("");
   }
 
   async function deleteComment(id) {
@@ -374,6 +378,24 @@ function Posts() {
     }
 
     return "All Posts";
+  }
+
+  async function getUserNameByPostId(id) {
+    try {
+      const res = await fetch(`${API_URL}/users`);
+
+      const users = await res.json();
+      const userName = users.find((u) => String(u.id) === String(id));
+      if (!res.ok) {
+        throw new Error("Failed to fetch post");
+      }
+
+      const data = await res.json();
+      return data.userId; // Return the user ID associated with the post
+    } catch (err) {
+      setError("Could not fetch post");
+      return null;
+    }
   }
 
   if (!currentUser) {
@@ -529,7 +551,7 @@ function Posts() {
                           <strong>Owner:</strong>{" "}
                           {String(post.userId) === String(currentUser.id)
                             ? "Me"
-                            : `User ${post.userId}`}
+                            : `${post.userName || post.userId}`}
                         </p>
                       </div>
                     </div>
