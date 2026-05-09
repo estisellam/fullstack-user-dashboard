@@ -166,6 +166,7 @@ function Todos() {
   function cancelEdit() {
     setEditingId(null);
     setEditingTitle("");
+    setError("");
   }
 
   function getFilteredTodos() {
@@ -183,19 +184,17 @@ function Todos() {
 
         if (searchBy === "completed") {
           const text = searchText.toLowerCase();
-
-          if (text === "true" || text === "yes" || text === "done") {
-            return todo.completed === true;
-          }
-
-          if (text === "false" || text === "no" || text === "not done") {
-            return todo.completed === false;
-          }
-
-          return false;
+          if(todo.completed === true) {
+            return todo.title.toLowerCase().includes(text);
+          } 
         }
 
-        return true;
+        if (searchBy === "not completed") {
+          const text = searchText.toLowerCase();
+            if(todo.completed === false) {
+                return todo.title.toLowerCase().includes(text);
+            }
+        }
       });
     }
 
@@ -268,6 +267,7 @@ function Todos() {
             <option value="id">Search by id</option>
             <option value="title">Search by title</option>
             <option value="completed">Search by completed</option>
+            <option value="not completed">Search by not completed</option>
           </select>
 
           <select value={sortBy} onChange={(e) => setSortBy(e.target.value)}>
