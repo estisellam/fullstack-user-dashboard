@@ -111,35 +111,74 @@ function Posts() {
       setError("Could not add post");
     }
   }
+  
+  async function deletePost(id) 
+   {
+        const confirmDelete = window.confirm(
+            "Are you sure you want to delete this post and all its comments?"
+        );
 
-  async function deletePost(id) {
-    try {
-      const res = await fetch(`${API_URL}/posts/${id}`, {
-        method: "DELETE",
-      });
+        if (!confirmDelete) {
+            return;
+        }
 
-      if (!res.ok) {
-        throw new Error("Failed to delete post");
-      }
+        try {
+            // First get all comments that belong to this post
+            const commentsRes = await fetch(`${API_URL}/comments?postId=${id}`);
 
-      setPosts(posts.filter((post) => post.id !== id));
+            if (!commentsRes.ok) {
+            throw new Error("Failed to load post comments");
+            }
 
-      if (selectedPost && selectedPost.id === id) {
-        setSelectedPost(null);
-        setShowComments(false);
-        setComments([]);
-      }
+            const postComments = await commentsRes.json();
 
-      setError("");
-    } catch (err) {
-      setError("Could not delete post");
+            // Delete each comment that belongs to this post
+            for (const comment of postComments) {
+            const deleteCommentRes = await fetch(
+                `${API_URL}/comments/${comment.id}`,
+                {
+                method: "DELETE",
+                }
+            );
+
+            if (!deleteCommentRes.ok) {
+                throw new Error("Failed to delete post comment");
+            }
+            }
+
+            // Delete the post itself
+            const res = await fetch(`${API_URL}/posts/${id}`, {
+            method: "DELETE",
+            });
+
+            if (!res.ok) {
+            throw new Error("Failed to delete post");
+            }
+
+            // Update posts on screen
+            setPosts(posts.filter((post) => post.id !== id));
+
+            // Update allComments on screen
+            setAllComments(allComments.filter((comment) => comment.postId !== id));
+
+            // If this post was selected, clear selected post and comments
+            if (selectedPost && selectedPost.id === id) {
+            setSelectedPost(null);
+            setShowComments(false);
+            setComments([]);
+            }
+
+            setError("");
+        } catch (err) {
+            setError("Could not delete post");
+        }
     }
-  }
 
-  function startEditPost(post) {
-    setEditingPostId(post.id);
-    setEditingPostTitle(post.title);
-    setEditingPostBody(post.body);
+  function startEditPost(post) 
+  {
+        setEditingPostId(post.id);
+        setEditingPostTitle(post.title);
+        setEditingPostBody(post.body);
   }
 
   async function saveEditPost(post) {
