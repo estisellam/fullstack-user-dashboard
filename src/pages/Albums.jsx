@@ -15,7 +15,8 @@ function Albums() {
   const [photos, setPhotos] = useState([]);
 
   const [selectedAlbum, setSelectedAlbum] = useState(null);
-  const [visibleCount, setVisibleCount] = useState(PHOTOS_PER_PAGE);
+  const [loadedPhotosCount, setLoadedPhotosCount] = useState(0);
+  const [hasMorePhotos, setHasMorePhotos] = useState(false);
 
   const [searchText, setSearchText] = useState("");
   const [searchBy, setSearchBy] = useState("title");
@@ -187,7 +188,8 @@ function Albums() {
       if (selectedAlbum && selectedAlbum.id === albumId) {
         setSelectedAlbum(null);
         setPhotos([]);
-        setVisibleCount(PHOTOS_PER_PAGE);
+        setLoadedPhotosCount(0);
+        setHasMorePhotos(false);
       }
 
       setEditingAlbumId(null);
@@ -199,12 +201,19 @@ function Albums() {
   }
 
   async function selectAlbum(album) {
-    try {
-      setSelectedAlbum(album);
-      setVisibleCount(PHOTOS_PER_PAGE);
-      setPhotos([]);
+    setSelectedAlbum(album);
+    setPhotos([]);
+    setLoadedPhotosCount(0);
+    setHasMorePhotos(false);
 
-      const res = await fetch(`${API_URL}/photos?albumId=${album.id}`);
+    await getPhotosPart(album.id, 0);
+  }
+
+  async function getPhotosPart(albumId, startIndex) {
+    try {
+      const res = await fetch(
+        `${API_URL}/photos?albumId=${albumId}&_sort=id&_start=${startIndex}&_limit=${PHOTOS_PER_PAGE}`
+      );
 
       if (!res.ok) {
         throw new Error("Failed to load photos");
@@ -212,21 +221,56 @@ function Albums() {
 
       const data = await res.json();
 
-      setPhotos(data);
+      if (startIndex === 0) {
+        setPhotos(data);
+      } else {
+        setPhotos((prevPhotos) => [...prevPhotos, ...data]);
+      }
+
+      setLoadedPhotosCount(startIndex + data.length);
+      setHasMorePhotos(data.length === PHOTOS_PER_PAGE);
       setError("");
     } catch (err) {
       setError("Could not load photos");
     }
   }
 
+  async function getNextPhotoId() {
+    const res = await fetch(`${API_URL}/photos`);
+
+    if (!res.ok) {
+      throw new Error("Failed to get photos");
+    }
+
+    const data = await res.json();
+
+    const numericIds = data
+      .map((photo) => Number(photo.id))
+      .filter((id) => !isNaN(id));
+
+    if (numericIds.length === 0) {
+      return 1;
+    }
+
+    return Math.max(...numericIds) + 1;
+  }
+
   async function addPhoto() {
+    if (!selectedAlbum) {
+      setError("Please select an album first");
+      return;
+    }
+
     if (newPhotoTitle.trim() === "" || newPhotoUrl.trim() === "") {
       setError("Please enter photo title and url");
       return;
     }
 
     try {
+      const nextId = await getNextPhotoId();
+
       const newPhoto = {
+        id: nextId,
         albumId: selectedAlbum.id,
         title: newPhotoTitle,
         url: newPhotoUrl,
@@ -248,6 +292,8 @@ function Albums() {
       const savedPhoto = await res.json();
 
       setPhotos([...photos, savedPhoto]);
+      setLoadedPhotosCount((prevCount) => prevCount + 1);
+
       setNewPhotoTitle("");
       setNewPhotoUrl("");
       setError("");
@@ -267,6 +313,9 @@ function Albums() {
       }
 
       setPhotos(photos.filter((photo) => photo.id !== id));
+      setLoadedPhotosCount((prevCount) =>
+        prevCount > 0 ? prevCount - 1 : 0
+      );
       setError("");
     } catch (err) {
       setError("Could not delete photo");
@@ -336,14 +385,20 @@ function Albums() {
         if (searchBy === "title") {
           return album.title.toLowerCase().includes(searchText.toLowerCase());
         }
+
+        return false;
       });
     }
 
     return filtered;
   }
 
-  function loadMorePhotos() {
-    setVisibleCount(visibleCount + PHOTOS_PER_PAGE);
+  async function loadMorePhotos() {
+    if (!selectedAlbum) {
+      return;
+    }
+
+    await getPhotosPart(selectedAlbum.id, loadedPhotosCount);
   }
 
   if (!currentUser) {
@@ -351,7 +406,7 @@ function Albums() {
   }
 
   const filteredAlbums = getFilteredAlbums();
-  const visiblePhotos = photos.slice(0, visibleCount);
+  const visiblePhotos = photos;
 
   return (
     <div className="page">
@@ -600,7 +655,7 @@ function Albums() {
                 ))}
               </div>
 
-              {visibleCount < photos.length && (
+              {hasMorePhotos && (
                 <button onClick={loadMorePhotos}>Load More Photos</button>
               )}
             </>
