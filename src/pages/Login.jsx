@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { useNavigate, Link } from "react-router-dom";
+import { useNavigate, Link,Navigate } from "react-router-dom";
 
 export default function Login() {
   const [username, setUsername] = useState("");
@@ -8,6 +8,14 @@ export default function Login() {
 
   //to pass between pages
   const navigate = useNavigate();
+
+  const currentUser = JSON.parse(
+    localStorage.getItem("currentUser")
+  );
+
+  if (currentUser) {
+    return <Navigate to="/home" />;
+  }
 
   //async func because we wait for server
   async function handleLogin(e) {
